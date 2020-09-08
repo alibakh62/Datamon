@@ -3,6 +3,7 @@
 
 .App {
   text-align: center;
+  background-color: rgb(219, 209, 245);
 }
 
 .App-header {
@@ -32,4 +33,25 @@
 
 .App-link {
   color: #61dafb;
+}
+
+.mission_cards {
+  font-family: Nunito;
+  display: flex;
+  flex-direction: row;
+  /* margin: 10px; */
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mission_cards h3, p {
+  font-family: Nunito;
+}
+
+.cards {
+  margin: 5px;
+}
+
+.body {
+  background-color: powderblue;
 }
