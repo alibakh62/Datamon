@@ -15,7 +15,7 @@ import {
   KeyboardDatePicker
 } from "@material-ui/pickers";
 
-import "./styles.css";
+import "./CreateProject.css";
 
 const useStyles = makeStyles((theme) => ({
   text: {

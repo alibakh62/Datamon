@@ -2,6 +2,7 @@ import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import Button from '@material-ui/core/Button';
+import GetStarted from './GetStarted'
 
 const getStartedTheme = createMuiTheme({
   typography: {
@@ -43,31 +44,45 @@ const useStyles = makeStyles((theme) => ({
 
 const Header = () => {
   const classes = useStyles();
+  const [showMenu, setShowMenu] = React.useState(false);
 
-  const handleClick = () => {
-    alert('Get Started is clicked!')
+  const handleAboutClick = () => {
+    alert('About us is clicked!')
+  }
+
+  const handleLoginClick = () => {
+    alert('Login is clicked!')
+  }
+
+  const handleMenuClick = () => {
+    setShowMenu((showMenu) => !showMenu);
   }
 
   return (
+    <div className="header__home">
       <div className={classes.nav_auth}>
         <ThemeProvider theme={loginTheme}>
-          <Button onClick={handleClick}>
+          <Button onClick={handleAboutClick}>
             About us
           </Button>
           <Button variant="contained"
                   color="primary" 
-                  onClick={handleClick}>
+                  onClick={handleLoginClick}>
             Log in
           </Button>
         <ThemeProvider theme={getStartedTheme}>
           <Button variant="contained" 
                   color="secondary" 
-                  onClick={handleClick}>
+                  onClick={handleMenuClick}>
             Get Started
           </Button>
         </ThemeProvider>
         </ThemeProvider>
       </div>
+      <div>
+        {showMenu ? <GetStarted /> : null}
+      </div>
+    </div>
   );
 }
 
