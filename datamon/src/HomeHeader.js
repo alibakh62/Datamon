@@ -7,7 +7,7 @@ const getStartedTheme = createMuiTheme({
   typography: {
     fontFamily: "Nunito",
     fontWeight: 400,
-    fontSize: 12
+    fontSize: 16,
   },
   spacing: {
     marginLeft: 1
@@ -21,7 +21,8 @@ const loginTheme = createMuiTheme({
   typography: {
     fontFamily: "Nunito",
     fontWeight: 400,
-    fontSize: 12
+    fontSize: 16,
+    color: 'white',
   },
   spacing: {
     marginRight: 1,
@@ -34,12 +35,13 @@ const useStyles = makeStyles((theme) => ({
     '& > *': {
       margin: theme.spacing(3),
       borderRadius: 25,
-      fontFamiliy: 'Nunito'
+      fontFamiliy: 'Nunito',
+      color: 'white',
     },
   },
 }));
 
-const GetStarted = () => {
+const Header = () => {
   const classes = useStyles();
 
   const handleClick = () => {
@@ -49,6 +51,9 @@ const GetStarted = () => {
   return (
       <div className={classes.nav_auth}>
         <ThemeProvider theme={loginTheme}>
+          <Button onClick={handleClick}>
+            About us
+          </Button>
           <Button variant="contained"
                   color="primary" 
                   onClick={handleClick}>
@@ -66,4 +71,4 @@ const GetStarted = () => {
   );
 }
 
-export default GetStarted
+export default Header
