@@ -11,8 +11,8 @@ function App() {
         {/* <Home /> */}
         <Switch>
           <Route path="/createproject">
-            {/* <CreateProject /> */}
-            <Test />
+            <CreateProject />
+            {/* <Test /> */}
           </Route>
           <Route path="/">
             <Home />
