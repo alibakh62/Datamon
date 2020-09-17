@@ -2,7 +2,9 @@ import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import Button from '@material-ui/core/Button';
+import Avatar from '@material-ui/core/Avatar';
 import GetStarted from './GetStarted'
+import { useStateValue } from './StateProvider'
 
 const getStartedTheme = createMuiTheme({
   typography: {
@@ -45,6 +47,7 @@ const useStyles = makeStyles((theme) => ({
 const Header = () => {
   const classes = useStyles();
   const [showMenu, setShowMenu] = React.useState(false);
+  const [{ user }] = useStateValue();
 
   const handleAboutClick = () => {
     alert('About us is clicked!')
@@ -65,11 +68,15 @@ const Header = () => {
           <Button onClick={handleAboutClick}>
             About us
           </Button>
-          <Button variant="contained"
+          {/* <Button variant="contained"
                   color="primary" 
                   onClick={handleLoginClick}>
             Log in
-          </Button>
+          </Button> */}
+          <Avatar className="header__avatar"
+                  alt={user?.displayName}
+                  src={user?.photoURL}
+          />
         <ThemeProvider theme={getStartedTheme}>
           <Button variant="contained" 
                   color="secondary" 

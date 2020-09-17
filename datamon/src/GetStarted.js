@@ -8,10 +8,6 @@ export default function GetStarted() {
 
   const history = useHistory();
 
-  const handleClick = () => {
-    alert('Yo! I got clicked')
-  }
-
   return (
     <div className="menu">
       <ButtonGroup
