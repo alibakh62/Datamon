@@ -15,6 +15,10 @@ import {
   KeyboardDatePicker
 } from "@material-ui/pickers";
 
+import db from './firebase'
+import { useStateValue } from './StateProvider'
+import { v4 as uuidv4 } from "uuid";
+
 import "./CreateProject.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -58,22 +62,86 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const CreateProject = function () {
+
   const classes = useStyles();
-  const [selectedDate, setSelectedDate] = React.useState(Date.now());
-  const [dataItem, setDataItem] = React.useState("");
+  const [projectName, setProjectName] = React.useState();
+  const [description, setDescription] = React.useState("");
+  const [startDate, setStartDate] = React.useState(Date.now());
+  const [endDate, setEndDate] = React.useState(Date.now());
+  const [dataItem, setDataItem] = React.useState([]);
   const [sampleSize, setSampleSize] = React.useState(0);
+  const [budget, setBudget] = React.useState(null);
 
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
-  };
 
+  const [{ user }, dispatch] = useStateValue();
+  const handleStartDate = (date) => {
+    setStartDate(date)
+  }
+  const handleEndDate = (date) => {
+    setEndDate(date)
+  }
+  const handleProjectName = (event) => {
+    setProjectName(event.target.value)
+  }
+  const handleDescription = (event) => {
+    setDescription(event.target.value)
+  }
   const handleDataItemChange = (event) => {
-    setDataItem(event.target.value);
-  };
-
+    setDataItem(dataItem.concat(event.target.value))
+  }
   const handleSampleSizeChange = (event) => {
-    setSampleSize(event.target.value);
-  };
+    setSampleSize(event.target.value)
+  }
+  const handleBudget = (event) => {
+    setBudget(event.target.value)
+  }
+  const onSumbit = (e) => {
+    e.preventDefault();
+    const projectId = uuidv4()
+    const projectSubmitDate = Date.now()
+    console.log(`project name: ${ projectName }`)
+    console.log(`project id: ${ projectId }`)
+    console.log(`submit date: ${ projectSubmitDate }`)
+    console.log(`budget: ${ budget }`)
+    console.log(`description: ${ description }`)
+    console.log(`start date: ${ startDate }`)
+    console.log(`end date: ${ endDate }`)
+    console.log(`user_id: ${ user }`)
+    console.log(`dataItem: ${ dataItem }`)
+    console.log(`sampleSize: ${ sampleSize }`)
+    db.collection("user_projects").add({
+      project_budget: budget,
+      project_data_items: dataItem,
+      project_description: description,
+      project_end_date: endDate,
+      project_id: projectId,
+      project_name: projectName,
+      project_sample_size: sampleSize,
+      project_start_date: startDate,
+      project_submit_date: projectSubmitDate,
+      user_id: user,
+    })
+    .then(function() {
+      console.log("Document successfully written!");
+    })
+    .catch(function(error) {
+      console.error("Error writing document: ", error);
+    });
+  }
+
+  // const onSubmit = () => {
+  //   db.collection("user_projects").add({
+  //     name: "Los Angeles",
+  //     state: "CA",
+  //     country: "USA"
+  //   })
+  //   .then(function() {
+  //     console.log("Document successfully written!");
+  //   })
+  //   .catch(function(error) {
+  //     console.error("Error writing document: ", error);
+  //   });
+  // }
 
   return (
     <div>
@@ -94,6 +162,7 @@ const CreateProject = function () {
                 label="required"
                 defaultValue="e.g. Visits to grocery"
                 variant="outlined"
+                onChange={handleProjectName}
               />
               <InputLabel className={classes.textField}>Description</InputLabel>
               <TextField
@@ -105,6 +174,7 @@ const CreateProject = function () {
                 label="required"
                 defaultValue="briefly explain the project"
                 variant="outlined"
+                onChange={handleDescription}
               />
             </div>
           </form>
@@ -126,8 +196,8 @@ const CreateProject = function () {
               margin="normal"
               id="project-start-date"
               label="Start Date"
-              value={selectedDate}
-              onChange={handleDateChange}
+              value={startDate}
+              onChange={handleStartDate}
               KeyboardButtonProps={{
                 "aria-label": "change date"
               }}
@@ -144,8 +214,8 @@ const CreateProject = function () {
               margin="normal"
               id="project-end-date"
               label="End Date"
-              value={selectedDate}
-              onChange={handleDateChange}
+              value={endDate}
+              onChange={handleEndDate}
               KeyboardButtonProps={{
                 "aria-label": "change date"
               }}
@@ -200,6 +270,7 @@ const CreateProject = function () {
               shrink: true
             }}
             variant="outlined"
+            onChange={handleBudget}
           />
         </Grid>
         <Grid item xs={4} />
@@ -208,7 +279,7 @@ const CreateProject = function () {
             className={classes.textField}
             variant="contained"
             color="primary"
-          >
+            onClick={onSumbit}>
             CREATE PROJECT
           </Button>
         </Grid>

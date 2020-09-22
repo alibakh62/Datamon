@@ -1,7 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700;900&display=swap');
 
 .header__home {
-    background-color: red;
-    position: absolute;
-    top: 0;
-    right: 0;
+    background-color: darkblue;
+    display: flex;
+    flex-direction: row;
+    font-family: Nunito;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header__right {
+    margin-right: 20px;
+    width: 25%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.header__right > button {
+    color: white;
+}
+
+.header__left {
+    margin-left: 20px;
+    margin-right: auto;
+    color: white;
+}
+
+.header__avatar {
+
 }

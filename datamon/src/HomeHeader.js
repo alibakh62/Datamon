@@ -5,6 +5,8 @@ import Button from '@material-ui/core/Button';
 import Avatar from '@material-ui/core/Avatar';
 import GetStarted from './GetStarted'
 import { useStateValue } from './StateProvider'
+import './HomeHeader.css'
+import { useHistory } from "react-router-dom"
 
 const getStartedTheme = createMuiTheme({
   typography: {
@@ -48,6 +50,7 @@ const Header = () => {
   const classes = useStyles();
   const [showMenu, setShowMenu] = React.useState(false);
   const [{ user }] = useStateValue();
+  const history = useHistory();
 
   const handleAboutClick = () => {
     alert('About us is clicked!')
@@ -57,14 +60,17 @@ const Header = () => {
     alert('Login is clicked!')
   }
 
-  const handleMenuClick = () => {
-    setShowMenu((showMenu) => !showMenu);
-  }
-
   return (
     <div className="header__home">
-      <div className={classes.nav_auth}>
-        <ThemeProvider theme={loginTheme}>
+      <div className="header__left">
+        <h1>DATAMON</h1>
+      </div>
+      {/* <div className={classes.nav_auth}> */}
+      <div className="header__right">
+        {/* <ThemeProvider theme={loginTheme}> */}
+          <Button onClick={() => history.push('/')}>
+            Home
+          </Button>
           <Button onClick={handleAboutClick}>
             About us
           </Button>
@@ -77,14 +83,14 @@ const Header = () => {
                   alt={user?.displayName}
                   src={user?.photoURL}
           />
-        <ThemeProvider theme={getStartedTheme}>
+        {/* <ThemeProvider theme={getStartedTheme}> */}
           <Button variant="contained" 
                   color="secondary" 
-                  onClick={handleMenuClick}>
+                  onClick={() => setShowMenu((showMenu) => !showMenu)}>
             Get Started
           </Button>
-        </ThemeProvider>
-        </ThemeProvider>
+        {/* </ThemeProvider> */}
+        {/* </ThemeProvider> */}
       </div>
       <div>
         {showMenu ? <GetStarted /> : null}

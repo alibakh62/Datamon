@@ -15,6 +15,7 @@ function App() {
       <Router>
         {!user ? (
             <Login />
+            // <Home />
           ) : (
           <Switch>
             <Route path="/createproject">
