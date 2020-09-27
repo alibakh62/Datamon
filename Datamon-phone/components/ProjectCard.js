@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, Text } from 'react-native'
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native'
 import { Card } from 'react-native-elements'
 import { AppLoading } from 'expo';
 import {
@@ -22,8 +22,17 @@ import {
 
 const styles = StyleSheet.create({
   card: {
+    backgroundColor: '#DCE3E3',
     width: 350,
     borderRadius: 25,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   name: {
     marginBottom: 2,
@@ -69,11 +78,13 @@ const ProjectCard = ({name, title, description}) => {
     <AppLoading />
   } else {
     return(
-      <Card containerStyle={styles.card}>
-        <Card.Title style={styles.name}>{name}</Card.Title>
-        <Text style={styles.title}>{title}</Text>
-        <Text style={styles.description}>{description}</Text>
-    </Card>
+      <TouchableOpacity onPress={() => alert('Hey! Bitch')}>
+        <Card containerStyle={styles.card}>
+          <Card.Title style={styles.name}>{name}</Card.Title>
+          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.description}>{description}</Text>
+        </Card>
+      </TouchableOpacity>
     )
   }
 }
