@@ -1,5 +1,5 @@
-import React from 'react'
-import { StyleSheet, View, Text, TouchableHighlight } from 'react-native'
+import React, { useState } from 'react'
+import { StyleSheet, View, Text, TouchableHighlight, Modal } from 'react-native'
 import { AppLoading } from 'expo';
 import {
   useFonts,
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
   }
 })
 
-const ProjectSignup = ({name, title, description, modalVisible}) => {
+const ProjectSignup = ({name, title, description, expandProject}) => {
 
   const fontsLoaded = useFonts({
     Nunito_200ExtraLight,
@@ -105,7 +105,7 @@ const ProjectSignup = ({name, title, description, modalVisible}) => {
     Nunito_900Black_Italic,
   })
 
-  const [modalVisible, setModalVisible] = useState(false)
+  const [modalVisible, setModalVisible] = useState(expandProject)
   const signUp = () => {
     alert('Navigate to sign up')
   }

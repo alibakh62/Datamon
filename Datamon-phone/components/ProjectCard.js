@@ -87,12 +87,12 @@ const ProjectCard = ({name, title, description}) => {
   } else {
     return(
       <TouchableOpacity onPress={expandCard}>
-        <ProjectSignup 
+        {/* <ProjectSignup 
         name={name}
         title={title}
         description={description}
-        modalVisible={expandProject}
-        />
+        expandProject={expandProject}
+        /> */}
         <Card containerStyle={styles.card}>
           <Card.Title style={styles.name}>{name}</Card.Title>
           <Text style={styles.title}>{title}</Text>

@@ -36,11 +36,12 @@ export default function App() {
     <ScrollView style={styles.scroll_view}>
       <View style={styles.app}>
         <Text>Datamon is the future bitches</Text>
-        {cards.map(({project_name, project_description}) => (
+        {cards.map((card) => (
           <ProjectCard
+          key={card.id}
           name="Company A"
-          title={project_name}
-          description={project_description}
+          title={card.project_name}
+          description={card.project_description}
           />
         ))}
         <ProjectCard 
