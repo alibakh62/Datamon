@@ -104,4 +104,9 @@ dist
 .tern-port
 
 # custom
+<<<<<<< HEAD
 .DS_Store
+=======
+.expo/package-rinfo.json
+
+>>>>>>> 3aa2410c4de02d3a6ae337d8fa354ec5ab5afa04
