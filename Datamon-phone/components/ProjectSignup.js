@@ -125,9 +125,9 @@ const ProjectSignup = ({name, title, description, expandProject}) => {
         >
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
-              <Text style={styles.modalName}>{name}</Text>
-              <Text style={styles.modalTitle}>{title}</Text>
-              <Text style={styles.modalDescription}>{description}</Text>
+              <Text style={{...styles.modalName, fontFamily: 'Nunito_700Bold'}}>{name}</Text>
+              <Text style={{...styles.modalTitle, fontFamily: 'Nunito_400Regular'}}>{title}</Text>
+              <Text style={{...styles.modalDescription, fontFamily: 'Nunito_300Light'}}>{description}</Text>
 
               <View style={styles.buttonGroup}>
                 <TouchableHighlight

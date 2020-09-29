@@ -41,19 +41,16 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     textAlign: 'left',
     fontSize: 24,
-    fontFamily: 'Nunito_700Bold',
   },
   title: {
     textAlign: 'left',
     marginBottom: 15,
     marginLeft: 5,
     fontSize: 20,
-    fontFamily: 'Nunito_400Regular',
   },
   description: {
     fontStyle: 'italic',
     marginLeft: 5,
-    fontFamily: "Nunito_300Light_Italic",
   }
 })
 
@@ -85,7 +82,7 @@ const ProjectCard = ({name, title, description}) => {
   if (!fontsLoaded) {
     <AppLoading />
   } else {
-    return(
+    return (
       <TouchableOpacity onPress={expandCard}>
         {/* <ProjectSignup 
         name={name}
@@ -94,9 +91,9 @@ const ProjectCard = ({name, title, description}) => {
         expandProject={expandProject}
         /> */}
         <Card containerStyle={styles.card}>
-          <Card.Title style={styles.name}>{name}</Card.Title>
-          <Text style={styles.title}>{title}</Text>
-          <Text style={styles.description}>{description}</Text>
+          <Card.Title style={{...styles.name, fontFamily: 'Nunito_700Bold'}}>{name}</Card.Title>
+          <Text style={{...styles.title, fontFamily: 'Nunito_400Regular'}}>{title}</Text>
+          <Text style={{...styles.description, fontFamily: 'Nunito_300Light'}}>{description}</Text>
         </Card>
       </TouchableOpacity>
     )
