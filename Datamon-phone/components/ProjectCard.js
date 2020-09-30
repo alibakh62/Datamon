@@ -6,6 +6,7 @@ import { StyleSheet,
   TouchableHighlight,
   Modal } from 'react-native'
 import { Card } from 'react-native-elements'
+import { Overlay, Button } from 'react-native-elements'
 import { AppLoading } from 'expo';
 import {
   useFonts,
@@ -52,6 +53,12 @@ const ProjectCard = ({name, title, description}) => {
     console.log(`name: ${ name }`)
   }
 
+  const [visible, setVisible] = useState(false)
+
+  const toggleOverlay = () => {
+    setVisible(!visible);
+  }  
+
   const signUp = () => {
     alert('Navigate to sign up')
   }
@@ -64,7 +71,7 @@ const ProjectCard = ({name, title, description}) => {
         <Modal
           animationType="slide"
           transparent={true}
-          visible={modalVisible}
+          visible={false}//{modalVisible}
           onRequestClose={() => {
             Alert.alert("Modal has been closed.");
           }}
@@ -94,13 +101,39 @@ const ProjectCard = ({name, title, description}) => {
             </View>
           </View>
         </Modal>
-        <TouchableOpacity onPress={expandCard}>
-          <Card containerStyle={styles.card} onPress={expandCard}>
+        <TouchableOpacity onPress={toggleOverlay}>
+          <Card containerStyle={styles.card}>
             <Card.Title style={{...styles.name, fontFamily: 'Nunito_700Bold'}}>{name}</Card.Title>
             <Text style={{...styles.title, fontFamily: 'Nunito_400Regular'}}>{title}</Text>
             <Text style={{...styles.description, fontFamily: 'Nunito_300Light_Italic'}}>{description}</Text>
           </Card>
         </TouchableOpacity>
+        <Overlay isVisible={visible} onBackdropPress={toggleOverlay}>
+          <View style={styles.centeredView}>
+              <View style={styles.modalView}>
+                <Text style={{...styles.modalName, fontFamily: 'Nunito_700Bold'}}>{name}</Text>
+                <Text style={{...styles.modalTitle, fontFamily: 'Nunito_400Regular'}}>{title}</Text>
+                <Text style={{...styles.modalDescription, fontFamily: 'Nunito_300Light'}}>{description}</Text>
+
+                <View style={styles.buttonGroup}>
+                  <TouchableHighlight
+                    style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
+                    onPress={() => {
+                      setVisible(!visible);
+                    }}
+                  >
+                    <Text style={styles.textStyle}>Back</Text>
+                  </TouchableHighlight>
+                  <TouchableHighlight
+                    style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
+                    onPress={signUp}
+                  >
+                    <Text style={styles.textStyle}>Join</Text>
+                  </TouchableHighlight>
+                </View>
+              </View>
+            </View>
+        </Overlay>
       </View>
     )
   }
