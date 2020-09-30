@@ -66,7 +66,7 @@ export default function App() {
       <View style={styles.app}>
         <Button title="Show data" onPress={printStuff}/>
         <Text>Datamon is the future bitches</Text>
-        {cards.map((card, index) => (
+        {cards.map(card => (
           <ProjectCard
           key={card.project_id}
           name="Company A"
@@ -75,35 +75,31 @@ export default function App() {
           />
         ))}
         <ProjectCard 
-        name="Company A"
+        name="Company A1"
         title="Project B"
         description="This is a project focused on test A."/>
         <ProjectCard 
-        name="Company A"
+        name="Company A2"
         title="Project B"
         description="This is a project focused on test A."/>
         <ProjectCard 
-        name="Company A"
+        name="Company A3"
         title="Project B"
         description="This is a project focused on test A."/>
         <ProjectCard 
-        name="Company A"
+        name="Company A4"
         title="Project B"
         description="This is a project focused on test A."/>
         <ProjectCard 
-        name="Company A"
+        name="Company A5"
         title="Project B"
         description="This is a project focused on test A."/>
         <ProjectCard 
-        name="Company A"
+        name="Company A6"
         title="Project B"
         description="This is a project focused on test A."/>
         <ProjectCard 
-        name="Company A"
-        title="Project B"
-        description="This is a project focused on test A."/>
-        <ProjectCard 
-        name="Company A"
+        name="Company A7"
         title="Project B"
         description="This is a project focused on test A."/>
       </View>
