@@ -2,23 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, SafeAreaView, Button } from 'react-native'
 import Constants from 'expo-constants';
 import ProjectCard from './components/ProjectCard'
+import NavBar from './components/NavBar'
 import db from './firebase'
-
-const styles = StyleSheet.create({
-  app: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  scroll_view: {
-    marginHorizontal: 20,
-  },
-  container: {
-    flex: 1,
-    marginTop: Constants.statusBarHeight,
-  }
-})
 
 export default function App() {
 
@@ -69,41 +54,33 @@ export default function App() {
         {cards.map(card => (
           <ProjectCard
           key={card.project_id}
-          name="Company A"
+          name={card.user_name}
           title={card.project_name}
           description={card.project_description}
           />
         ))}
-        <ProjectCard 
-        name="Company A1"
-        title="Project B"
-        description="This is a project focused on test A."/>
-        <ProjectCard 
-        name="Company A2"
-        title="Project B"
-        description="This is a project focused on test A."/>
-        <ProjectCard 
-        name="Company A3"
-        title="Project B"
-        description="This is a project focused on test A."/>
-        <ProjectCard 
-        name="Company A4"
-        title="Project B"
-        description="This is a project focused on test A."/>
-        <ProjectCard 
-        name="Company A5"
-        title="Project B"
-        description="This is a project focused on test A."/>
-        <ProjectCard 
-        name="Company A6"
-        title="Project B"
-        description="This is a project focused on test A."/>
-        <ProjectCard 
-        name="Company A7"
-        title="Project B"
-        description="This is a project focused on test A."/>
       </View>
     </ScrollView>
+    <NavBar />
     </SafeAreaView>
-  );
+  )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
+    marginTop: Constants.statusBarHeight,
+  },
+  scroll_view: {
+    marginHorizontal: 20,
+  },
+  app: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+  },
+})

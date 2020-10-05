@@ -47,13 +47,13 @@ const ProjectCard = ({name, title, description}) => {
 
   const [modalVisible, setModalVisible] = useState(false)
 
+  const [visible, setVisible] = useState(false)
+
   const expandCard = () => {
     setModalVisible(!modalVisible)
     console.log(`modal visible: ${ modalVisible }`)
     console.log(`name: ${ name }`)
   }
-
-  const [visible, setVisible] = useState(false)
 
   const toggleOverlay = () => {
     setVisible(!visible);
@@ -105,7 +105,9 @@ const ProjectCard = ({name, title, description}) => {
           <Card containerStyle={styles.card}>
             <Card.Title style={{...styles.name, fontFamily: 'Nunito_700Bold'}}>{name}</Card.Title>
             <Text style={{...styles.title, fontFamily: 'Nunito_400Regular'}}>{title}</Text>
-            <Text style={{...styles.description, fontFamily: 'Nunito_300Light_Italic'}}>{description}</Text>
+            <Text style={{...styles.description, fontFamily: 'Nunito_300Light_Italic'}}
+                  numberOfLines='3'>{description}
+            </Text>
           </Card>
         </TouchableOpacity>
         <Overlay isVisible={visible} onBackdropPress={toggleOverlay}>
@@ -113,7 +115,9 @@ const ProjectCard = ({name, title, description}) => {
               <View style={styles.modalView}>
                 <Text style={{...styles.modalName, fontFamily: 'Nunito_700Bold'}}>{name}</Text>
                 <Text style={{...styles.modalTitle, fontFamily: 'Nunito_400Regular'}}>{title}</Text>
-                <Text style={{...styles.modalDescription, fontFamily: 'Nunito_300Light'}}>{description}</Text>
+                <Text style={{...styles.modalDescription, fontFamily: 'Nunito_300Light'}}
+                      numberOfLines='20'>{description}
+                </Text>
 
                 <View style={styles.buttonGroup}>
                   <TouchableHighlight
