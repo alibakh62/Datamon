@@ -55,14 +55,6 @@ export default function NavBar() {
 
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 30,
-    backgroundColor: 'lightblue'
-  },
   navbar: {
     position: 'absolute',
     bottom: 0,
