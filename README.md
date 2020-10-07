@@ -13,6 +13,8 @@ Datamon is a platform that enables ordinary people make money from their own dat
 
 - [] Custom fonts are not being loaded properly. Sometimes they load and sometimes they don't. Currently, I'm using expo guideline to use custom fonts, but there should be a better more stable way.
 
+- [] In `Login`, we have to check if the record already exists before writing it to firestore.
+
 # Notes:
 
 - For adding custom fonts (e.g. Nunito), refer to [here](https://github.com/expo/google-fonts/tree/master/font-packages/nunito#readme)
