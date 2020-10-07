@@ -3,6 +3,7 @@ import * as React from 'react';
 import Projects from './screens/Projects'
 import Landing from './screens/Landing'
 import Login from './screens/Login'
+import ProjectSignUp from './screens/ProjectSignUp'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { StateProvider } from './StateProvider'
@@ -14,7 +15,7 @@ const App = () => {
   return (
     <StateProvider initialState={initialState} reducer={reducer}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Login">
+        <Stack.Navigator initialRouteName="ProjectSignUp">
           <Stack.Screen
             name="Home"
             component={Projects}
@@ -27,6 +28,11 @@ const App = () => {
           <Stack.Screen 
             name="Login" 
             component={Login} 
+          />
+          <Stack.Screen 
+            name="ProjectSignUp" 
+            component={ProjectSignUp} 
+            options={{ title: 'Project Signup'}}
           />
         </Stack.Navigator>
       </NavigationContainer>
