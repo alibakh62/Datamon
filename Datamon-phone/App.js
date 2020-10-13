@@ -33,6 +33,7 @@ const App = () => {
             name="ProjectSignUp" 
             component={ProjectSignUp} 
             options={{ title: 'Project Signup'}}
+            initialParams={{name: 'Project', title: 'Project Title'}}
           />
         </Stack.Navigator>
       </NavigationContainer>

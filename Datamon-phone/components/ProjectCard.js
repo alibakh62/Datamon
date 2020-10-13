@@ -26,7 +26,7 @@ import {
   Nunito_900Black_Italic,
 } from '@expo-google-fonts/nunito'
 
-const ProjectCard = ({name, title, description}) => {
+export default function ProjectCard({name, title, description, navigation}) {
 
   const fontsLoaded = useFonts({
     Nunito_200ExtraLight,
@@ -60,7 +60,8 @@ const ProjectCard = ({name, title, description}) => {
   }  
 
   const signUp = () => {
-    alert('Navigate to sign up')
+    navigation.navigate("ProjectSignUp", {name: {name}, title: {title}})
+    // alert('Navigate to sign up')
   }
 
   if (!fontsLoaded) {
@@ -239,5 +240,3 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   }
 })
-
-export default ProjectCard

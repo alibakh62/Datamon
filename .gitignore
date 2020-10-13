@@ -108,3 +108,5 @@ dist
 .DS_Store
 Datamon-phone/.expo/packager-info.json
 #>>>>>>> 3aa2410c4de02d3a6ae337d8fa354ec5ab5afa04
+
+Datamon-phone/.expo/web/

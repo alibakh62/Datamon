@@ -63,6 +63,7 @@ export default function Projects({ navigation }) {
           name={card.user_name}
           title={card.project_name}
           description={card.project_description}
+          navigation={navigation}
           />
         ))}
       </View>
