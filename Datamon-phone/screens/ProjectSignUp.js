@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { View, 
   Text,
   Switch, 
-  TouchableOpacity, 
+  TouchableOpacity,
+  FlatList,
   StyleSheet } from 'react-native'
 
 import { CheckBox, Divider } from 'react-native-elements'
@@ -10,35 +11,80 @@ import { CheckBox, Divider } from 'react-native-elements'
 import NavBar from '../components/NavBar'
 import db from '../firebase'
 
+import { useStateValue } from '../StateProvider'
+
 export default function ProjectSignUp({ route, navigation }) {
 
   const {name, title} = route.params
+  const [{ user }, dispatch] = useStateValue()
+  var [dataItems, setDataItems] = useState([])
+  const [LocationServices, setLocationServices] = useState(false)
+  const [AppUsage, setAppUsage] = useState(false)
+  const [Action, setAction] = useState(false)
 
-  const [dataItems, setDataItems] = useState([])
-
-  const addDataItem = item => {
-    console.log(`dataItems prev: ${ dataItems }`)
-    console.log(`item: ${ item.name }`)
-    setDataItems({...dataItems, name: item.name, checked: !item.checked})
-    console.log(`data items after: ${ dataItems }`)
+  const switchLocationServices = value => {
+    console.log(`value Loc services: ${ value }`)
+    setLocationServices(!LocationServices)
   }
 
-  const join = () => {
-    alert('Join the project')
-    // navigation.navigate('Home')
+  const switchAppUsage = value => {
+    console.log(`value app usage: ${ value }`)
+    setAppUsage(!AppUsage)
   }
+
+  useEffect(() => {
+    console.log(`useEffect Location Services: ${ LocationServices }`)
+    if (LocationServices) {
+      if (!dataItems.includes('Location Services')) {
+        setDataItems(dataItems.concat('Location Services'))
+      }
+    } else {
+      console.log('deleting loc services')
+      if (dataItems.includes('Location Services')) {
+        var index1 = dataItems.indexOf('Location Services')
+        console.log(`index of loc services: ${ index1 }`)
+        if (dataItems.length === 1) {
+          setDataItems([])
+        } else {
+          if (index1 > -1) {
+            setDataItems(dataItems.filter((e) => (e !== 'Location Services')))
+          }
+        }
+      }
+    }
+  }, [LocationServices])
+
+  useEffect(() => {
+    console.log(`useEffect App Usage: ${ AppUsage }`)
+    if (AppUsage) {
+      if (!dataItems.includes('App Usage')) {
+        setDataItems(dataItems.concat('App Usage'))
+      }
+    } else {
+      console.log('deleting app usage')
+      if (dataItems.includes('App Usage')) {
+        var index2 = dataItems.indexOf('App Usage')
+        console.log(`index of app usage: ${ index2 }`)
+        if (dataItems.length === 1) {
+          setDataItems([])
+        } else {
+          if (index2 > -1) {
+            setDataItems(dataItems.filter((e) => (e !== 'App Usage')))
+          }
+        }
+      }
+    }
+  }, [AppUsage])
 
   const back = () => {
     navigation.navigate("Home")
     // navigation.goBack()
   }
 
-  const printStuff = item => {
-    console.log(`printStuff: item: ${ item }`)
+  const join = () => {
+    // console.log('JOIN')
+    console.log(`data items: ${ dataItems }`)
   }
-
-  const dataItemsRef = [{name: 'Location Services', checked: false}, 
-                        {name: 'App Usage', checked: false}]
 
   return (
     <View style={styles.container__signup}>
@@ -49,9 +95,20 @@ export default function ProjectSignUp({ route, navigation }) {
       </View>
       <View style={styles.checkboxes}>
         <Text style={styles.dataitems}>Data Items:</Text>
-          {dataItemsRef.map(item => (
-            <DataItem item={item} />
-          ))}
+        <View style={styles.switch__container}>
+          <Switch 
+            onValueChange={switchLocationServices}
+            value={LocationServices}
+          />
+          <Text style={styles.switch__text}>Location Services</Text>
+        </View>
+        <View style={styles.switch__container}>
+          <Switch 
+            onValueChange={switchAppUsage}
+            value={AppUsage}
+          />
+          <Text style={styles.switch__text}>App Usage</Text>
+        </View>
         </View>
         <View style={styles.buttons__container}>
           <TouchableOpacity
@@ -65,27 +122,7 @@ export default function ProjectSignUp({ route, navigation }) {
               <Text style={styles.button__text}>Back</Text>
           </TouchableOpacity>
         </View>
-      {/* </View> */}
       <NavBar />
-    </View>
-  )
-}
-
-
-const DataItem = ({ item }) => {
-  const [isSelected, setIsSelected] = useState(false)
-
-  const selectItem = () => {
-    setIsSelected(!isSelected)
-  }
-
-  return (
-    <View style={styles.switch__container}>
-      <Switch 
-        onValueChange={selectItem}
-        value={isSelected}
-      />
-      <Text style={styles.switch__text}>{item.name}</Text>
     </View>
   )
 }
@@ -183,4 +220,13 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     fontSize: 20,
   },
+  flatlist: {
+    flex: 0,
+    paddingTop: 22
+   },
+   item: {
+     padding: 10,
+     fontSize: 18,
+     height: 44,
+   },
 })

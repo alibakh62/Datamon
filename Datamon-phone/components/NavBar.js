@@ -33,7 +33,7 @@ export default function NavBar() {
           <Icon
           //  reverse
           //  raised
-           name='funnel-dollar'
+           name='dollar'
            type='font-awesome'
            color='#e5e5e5'
            iconStyle={styles.icons}
