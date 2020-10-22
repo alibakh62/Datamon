@@ -15,7 +15,7 @@ import { useStateValue } from '../StateProvider'
 
 export default function ProjectSignUp({ route, navigation }) {
 
-  const {name, title} = route.params
+  const {projectId, name, title} = route.params
   const [{ user }, dispatch] = useStateValue()
   var [dataItems, setDataItems] = useState([])
   const [LocationServices, setLocationServices] = useState(false)
@@ -83,7 +83,21 @@ export default function ProjectSignUp({ route, navigation }) {
 
   const join = () => {
     // console.log('JOIN')
-    console.log(`data items: ${ dataItems }`)
+    console.log(`data items getting stored in DB: ${ dataItems.toString() }`)
+    console.log(`project id: ${ projectId['projectId'].toString() }`)
+    db.collection('providers_joined_projects').add({
+      data_items: dataItems,
+      date_joined: Date.now(),
+      project_id: projectId['projectId'].toString(),
+      user_id: "testUser"  //user.email,  #TODO: should come from user account info
+    })
+    .then(function() {
+      console.log("Document successfully written!")
+      // console.log(`user ${ user.displayName } joined project id: ${ projectId }`)
+    })
+    .catch(function(error) {
+      console.error("Error writing document: ", error)
+    })
   }
 
   return (

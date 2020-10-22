@@ -15,7 +15,7 @@ const App = () => {
   return (
     <StateProvider initialState={initialState} reducer={reducer}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="ProjectSignUp">
+        <Stack.Navigator initialRouteName="Home">
           <Stack.Screen
             name="Home"
             component={Projects}

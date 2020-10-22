@@ -26,7 +26,7 @@ import {
   Nunito_900Black_Italic,
 } from '@expo-google-fonts/nunito'
 
-export default function ProjectCard({name, title, description, navigation}) {
+export default function ProjectCard({projectId, name, title, description, navigation}) {
 
   const fontsLoaded = useFonts({
     Nunito_200ExtraLight,
@@ -60,7 +60,9 @@ export default function ProjectCard({name, title, description, navigation}) {
   }  
 
   const signUp = () => {
-    navigation.navigate("ProjectSignUp", {name: {name}, title: {title}})
+    setVisible(!visible)
+    console.log(`project id: ${ projectId }`)
+    navigation.navigate("ProjectSignUp", {projectId: {projectId}, name: {name}, title: {title}})
     // alert('Navigate to sign up')
   }
 

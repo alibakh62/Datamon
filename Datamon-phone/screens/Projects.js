@@ -12,7 +12,8 @@ export default function Projects({ navigation }) {
   useEffect(() => {
     // app component will run once when it loads
     db.collection("user_projects").onSnapshot(snapshot => {
-      setCards(snapshot.docs.map(doc => doc.data()))
+      setCards(snapshot.docs.map(doc => {return {...doc.data(), id: doc.id} }))
+      // setCards(snapshot.docs.map(doc => doc.data()))
     })
 
     // db.collection("user_projects").onSnapshot(snapshot => {
@@ -59,7 +60,8 @@ export default function Projects({ navigation }) {
         <Text>Datamon is the future bitches</Text>
         {cards.map(card => (
           <ProjectCard
-          key={card.project_id}
+          key={card.id}
+          projectId={card.id}
           name={card.user_name}
           title={card.project_name}
           description={card.project_description}
